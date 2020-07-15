@@ -1,9 +1,8 @@
-from django.shortcuts import render
-from django.views.generic import ListView,DetailView
 from django.views.generic.dates import ArchiveIndexView, YearArchiveView, MonthArchiveView
 from django.views.generic.dates import DayArchiveView, TodayArchiveView
-
 from blog.models import Post
+from django.views.generic import ListView, DetailView, TemplateView
+from django.conf import settings
 
 class PostLV(ListView):
     model = Post
@@ -34,3 +33,26 @@ class PostDAV(DayArchiveView):
 class PostTAV(TodayArchiveView):
     model = Post
     date_field = 'modify_dt'
+
+class TagCloudTV(TemplateView):
+    template_name = 'taggit/taggit_cloud.html'
+
+class TaggedObjectLV(ListView):
+    template_name = 'taggit/taggit_post_list.html'
+    model = Post
+
+    def get_queryset(self):
+        return Post.objects.filter(tags_name=self.kwargs.get('tag'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tagname'] = self.kwargs['tag']
+        return context
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['disqus_short'] = f"{settings.DISQUS_SHORNAME}"
+        context['disqus_id'] = f"post-{self.object.id}-{self.objext.slug}"
+        context['disqus_url'] = f"{settings.DISQUS_MY_DOMAIN}{self.object.get_absolute_url()}"
+        context['disqus_title'] = f"{self.object.slug}"
+        return context
