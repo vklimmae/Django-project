@@ -18,9 +18,11 @@ from bookmark.views import BookmarkLV, BookmarkDV
 from django.views.generic import ListView, DetailView
 from bookmark.models import Bookmark
 from django.urls import path, include
+from mysite.views import HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', HomeView.as_view(), name='home'),
     path('bookmark/', include('bookmark.urls')),
     path('blog/', include('blog.urls')),
     #path('bookmark/', BookmarkLV.as_view(), name='index'),

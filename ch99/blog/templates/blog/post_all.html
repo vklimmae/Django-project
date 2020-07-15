@@ -1,12 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Django Bookmark List {% endblock %}
+
+{% block header %} {% endblock %}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>post_all</title>
+
+    <title>Blog List</title>
+
 </head>
 <body>
 <h1>Blog List</h1>
 <br>
+
 
 {% for post in posts %}
     <h3><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></h3>
@@ -23,6 +37,11 @@
         {% endif %}
     </span>
 </div>
+
+
+
+
+
 
 </body>
 </html>
