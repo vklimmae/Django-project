@@ -19,6 +19,10 @@ from django.views.generic import ListView, DetailView
 from bookmark.models import Bookmark
 from django.urls import path, include
 from mysite.views import HomeView
+from django.conf.urls.static import static
+from django.conf import settings
+from mysite.views import UserCreateView, UserCreateDoneTV
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +33,8 @@ urlpatterns = [
     #path('bookmark/<int:pk>/', BookmarkDV.as_view(), name='detail'),
     #path('bookmark/', ListView.as_view(model=Bookmark), name='index'),
     #path('bookmark/<int:pk>/', DetailView.as_view(model=Bookmark), name='detail'),
-]
+    path('photo/', include('photo.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/register/', UserCreateView.as_view(), name='register'),
+    path('accounts/register/done/', UserCreateDoneTV.as_view(), name='register_done'),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

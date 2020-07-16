@@ -45,6 +45,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'photo:index' %}">Photo</a>
+          </li>
 
                 <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,8 +56,33 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{% url 'blog:index' %}">Post</a>
           <a class="dropdown-item" href="#">Archive</a>
+          <a class="dropdown-item" href="{% url 'blog:search' %}">Search</a>
         </ul>
       </div>
+
+
+
+      <ul class="navbar-nav ml-5 mr-5">
+        <li class="nav-item dropdown mx-1 btn btn-primary">
+            {% if user.is_active %}
+            <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                <i class="fas fa-user"></i>&ensp;{% firstof user.get_short_name user.get_username %}&ensp;</a>
+            <div class="dropdown-nemu">
+                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                 <a class="dropdown-item" href="{% url 'password_change' %}">ChangePassword</a>
+            </div>
+            {% else %}
+            <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+               <i class="fas fa-user"></i>&ensp;Anonymous&ensp;</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                <a class="dropdoen-item" href="{% url 'register' %}">Register</a>
+            </div>
+            {% endif %}
+        </li>
+      </ul>
+
+
     </div>
   </nav>
 
