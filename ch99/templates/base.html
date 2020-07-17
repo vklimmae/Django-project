@@ -42,9 +42,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'bookmark:index' %}">Bookmark</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="{% url 'photo:index' %}">Photo</a>
           </li>
@@ -93,8 +91,16 @@
   {% block header %}  {% endblock %}
 
   <!-- Main Content -->
-  {% block content %}
-  {% endblock %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+          {% block content %} {% endblock %}
+      </div>
+    </div>
+  </div>
+
+
 
   <!-- Footer -->
   <footer>
