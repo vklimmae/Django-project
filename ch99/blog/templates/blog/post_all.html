@@ -25,6 +25,32 @@
 <br>
 
 
+        <li class="nav_item dropdown mx-1 btn btn-primary">
+          <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Add</a>
+          <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'bookmark:add' %}">Bookmark</a>
+              <a class="dropdown-item" href="{% url 'blog:add' %}">Post</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="">Album</a>
+              <a class="dropdown-item" href="">Photo</a>
+
+          </div>
+        </li>
+
+
+        <li class="nav_item dropdown mx-1 btn btn-primary">
+          <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Change</a>
+          <div class="dropdown-menu">
+             <a class="dropdown-item" href="{% url 'bookmark:change' %}">Bookmark</a>
+             <a class="dropdown-item" href="{% url 'blog:change' %}">Post</a>
+             <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="">Album</a>
+              <a class="dropdown-item" href="">Photo</a>
+
+          </div>
+        </li>
+
+
 {% for post in posts %}
     <h3><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></h3>
     {{ post.modify_dt|date:"N d, Y" }}
@@ -39,8 +65,18 @@
         {% if page_obj.has_previous %}
             <a href="?page={{ page_obj.previous_page_number }}">PreviousPge</a>
         {% endif %}
+
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+        {% if page_obj.has_next %}
+            <a href=">page={{ page_obj.next_page_number }}">NextPage</a>
+        {% endif %}
+
     </span>
 </div>
+
+
+
 
 
 
